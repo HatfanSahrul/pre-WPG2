@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
     public float gravity=1;
+    public float tookTime=2.5f;
 
     public GameObject handler;
 
@@ -14,7 +15,9 @@ public class Player : MonoBehaviour
 
     private Transform playerTransform;
 
+    public bool isBringing;
     bool isClimbing, isLadder;
+
     bool isGrounded(){
         return GetComponent<Rigidbody2D>().velocity.y == 0;
     }

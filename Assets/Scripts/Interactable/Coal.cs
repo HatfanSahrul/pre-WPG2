@@ -15,6 +15,9 @@ public class Coal : MonoBehaviour
     public bool isCollide=false;
     public bool isDoing;
 
+    // stuff
+    public float tookTime;
+
     void Start(){
         handler=GameObject.FindGameObjectWithTag("GameController");
         int_button_i.SetActive(false);
@@ -43,25 +46,32 @@ public class Coal : MonoBehaviour
     }
 
     void doSomething(){
-        if(Input.GetKey(interact)){
+        if(Input.GetKey(interact) && tookTime>0){
             isDoing=true;
         }else if(Input.GetKeyUp(interact)){
             isDoing=false;
-            
+        }else{
+            isDoing=false;
         }
     }
 
     void spesial(){
         if(isDoing){
-            
+            tookTime-=Time.deltaTime;
         }
-        
+        if(tookTime<=0){
+            player.GetComponent<Player>().isBringing=true;
+        }else if(!isDoing && tookTime>0 && tookTime<player.GetComponent<Player>().tookTime){
+            tookTime=player.GetComponent<Player>().tookTime;
+        }
     }
     
     void OnTriggerEnter2D(Collider2D collision){
         if(collision.CompareTag("Player")){
            isCollide=true;
+           player=collision.gameObject;
            interact=collision.GetComponent<Player>().interactKey;
+           tookTime=collision.GetComponent<Player>().tookTime;
         }
     }
     
@@ -69,6 +79,7 @@ public class Coal : MonoBehaviour
         if(collision.CompareTag("Player")){
            isCollide=false;
            interact=KeyCode.None;
+           player=null;
         }
     }
 }
