@@ -50,8 +50,12 @@ public class Wheel : MonoBehaviour
     }
 
     void doSomething(){
+        bool El=handler.GetComponent<handler>().isElecticOn1;
         if(Input.GetKey(interact)){
             isDoing=true;
+            if(!El){
+                isDoing=false;
+            }
         }else if(Input.GetKeyUp(interact)){
             isDoing=false;
             compas.SetActive(false);

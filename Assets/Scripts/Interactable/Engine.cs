@@ -54,17 +54,35 @@ public class Engine : MonoBehaviour
     }
 
     void doSomething(){
+        isOn=handler.GetComponent<handler>().isElecticOn1;
         if(Input.GetKey(interact)){
             isDoing=true;
+            if(player!=null && player.GetComponent<Player>().isBringing==false){
+                isDoing=false;
+            }
         }else if(Input.GetKeyUp(interact)){
             isDoing=false;
-            
         }
     }
-
+    public float tookTime;
+    public int b;
     void spesial(){
-        if(isDoing){
-            
+        if(player!=null){
+            if(b==0){
+                tookTime=player.GetComponent<Player>().tookTime;
+                b++;
+            }
+            if(isDoing){
+                tookTime-=Time.deltaTime;
+                if(isDoing && tookTime<=0){
+                    player.GetComponent<Player>().isBringing=false;
+                    fuel+=50;
+                    b=0;
+                }
+        
+            }else if(!isDoing && tookTime>0 && player!=null && tookTime<player.GetComponent<Player>().tookTime){
+                tookTime=player.GetComponent<Player>().tookTime;
+            }
         }
         subMSpeed=handler.GetComponent<handler>().submarineSpeed;
     }
@@ -82,6 +100,7 @@ public class Engine : MonoBehaviour
         if(collision.CompareTag("Player")){
            isCollide=true;
            interact=collision.GetComponent<Player>().interactKey;
+           player=collision.gameObject;
         }
     }
     

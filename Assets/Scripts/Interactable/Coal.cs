@@ -46,7 +46,8 @@ public class Coal : MonoBehaviour
     }
 
     void doSomething(){
-        if(Input.GetKey(interact) && tookTime>0){
+        bool isOn=handler.GetComponent<handler>().isElecticOn2;
+        if(Input.GetKey(interact) && tookTime>0 && isOn){
             isDoing=true;
         }else if(Input.GetKeyUp(interact)){
             isDoing=false;
@@ -61,7 +62,7 @@ public class Coal : MonoBehaviour
         }
         if(tookTime<=0){
             player.GetComponent<Player>().isBringing=true;
-        }else if(!isDoing && tookTime>0 && tookTime<player.GetComponent<Player>().tookTime){
+        }else if(!isDoing && tookTime>0 && player!=null && tookTime<player.GetComponent<Player>().tookTime){
             tookTime=player.GetComponent<Player>().tookTime;
         }
     }
