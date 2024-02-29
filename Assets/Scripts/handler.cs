@@ -20,9 +20,11 @@ public class handler : MonoBehaviour
     public GameObject lvr1, lvr2;  
     // public GameObject compas;
     public GameObject[] wires, leaks;
-    public float[]
+    public float[] waterLevel=new float[9];
+    public float maxWaterLevel;
 
     void Start(){
+        maxWaterLevel=12f; 
         hide();
         isElecticOn1=true;
         isElecticOn2=true;
@@ -57,6 +59,11 @@ public class handler : MonoBehaviour
         if(submarineSpeed<=0){
             submarineSpeed=0;
         }
+        for (int i = 0; i < waterLevel.Length; i++) {
+            if (waterLevel[i] > maxWaterLevel) {
+                waterLevel[i] = maxWaterLevel + 0.1f;
+            }
+        }
     }
 
     void randomize(){
@@ -90,6 +97,6 @@ public class handler : MonoBehaviour
     }
     
     void status(){
-
+        
     }
 }

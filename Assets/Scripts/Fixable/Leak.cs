@@ -23,6 +23,7 @@ public class Leak : MonoBehaviour
         handler=GameObject.FindGameObjectWithTag("GameController");
         int_button_i.SetActive(false);
         int_button_e.SetActive(false);
+        n=timeTook;
     }
 
     void Update(){
@@ -46,7 +47,7 @@ public class Leak : MonoBehaviour
     }
 
     void doSomething(){
-        
+        handler.GetComponent<handler>().waterLevel[id]+=Time.deltaTime;
         if(Input.GetKey(interact)){
             isDoing=true;
         }else if(Input.GetKeyUp(interact)){
@@ -57,12 +58,18 @@ public class Leak : MonoBehaviour
 
     void spesial(){
         if(isDoing){
-            
+            fixing();
+        }else{
+            n=timeTook;
         }
     }
 
+    public float n;
     void fixing(){
-        timeTook-=Time.deltaTime;
+        n-=Time.deltaTime;
+        if(n<=0){
+            this.gameObject.SetActive(false);
+        }
     }
     
     void OnTriggerEnter2D(Collider2D collision){

@@ -15,10 +15,15 @@ public class Wire : MonoBehaviour
     public bool isCollide=false;
     public bool isDoing;
 
+    // stuff
+    public int id;
+    public float timeTook; 
+
     void Start(){
         handler=GameObject.FindGameObjectWithTag("GameController");
         int_button_i.SetActive(false);
         int_button_e.SetActive(false);
+        n=timeTook;
     }
 
     void Update(){
@@ -39,10 +44,10 @@ public class Wire : MonoBehaviour
             int_button_i.SetActive(false);
             int_button_e.SetActive(false);
         }
-
     }
 
     void doSomething(){
+        // handler.GetComponent<handler>().waterLevel[id]+=.5f;
         if(Input.GetKey(interact)){
             isDoing=true;
         }else if(Input.GetKeyUp(interact)){
@@ -53,7 +58,17 @@ public class Wire : MonoBehaviour
 
     void spesial(){
         if(isDoing){
-            
+            fixing();
+        }else{
+            n=timeTook;
+        }
+    }
+
+    public float n;
+    void fixing(){
+        n-=Time.deltaTime;
+        if(n<=0){
+            this.gameObject.SetActive(false);
         }
     }
     
