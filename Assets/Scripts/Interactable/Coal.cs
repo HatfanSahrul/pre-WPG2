@@ -60,7 +60,7 @@ public class Coal : MonoBehaviour
         if(isDoing){
             tookTime-=Time.deltaTime;
         }
-        if(tookTime<=0){
+        if(tookTime<=0 && player!=null){
             player.GetComponent<Player>().isBringing=true;
         }else if(!isDoing && tookTime>0 && player!=null && tookTime<player.GetComponent<Player>().tookTime){
             tookTime=player.GetComponent<Player>().tookTime;
