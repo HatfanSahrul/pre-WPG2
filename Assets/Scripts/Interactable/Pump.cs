@@ -53,7 +53,7 @@ public class Pump : MonoBehaviour
 
     void spesial(){
         if(isDoing){
-            
+            handler.GetComponent<handler>().pumping();
         }
     }
     

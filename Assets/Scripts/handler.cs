@@ -62,6 +62,8 @@ public class handler : MonoBehaviour
         for (int i = 0; i < waterLevel.Length; i++) {
             if (waterLevel[i] > maxWaterLevel) {
                 waterLevel[i] = maxWaterLevel + 0.1f;
+            }else if (waterLevel[i] <= 0) {
+                waterLevel[i] = 0;
             }
         }
     }
@@ -96,7 +98,21 @@ public class handler : MonoBehaviour
         }
     }
     
+    public float fuel;
+    public float jarakTempuh;
     void status(){
-        
+        if(fuel<=0 || !isElecticOn1){
+            submarineSpeed-=Time.deltaTime;
+        }
+        if(submarineSpeed<=0){
+            Time.timeScale=0;
+        }
+
+    }
+
+    public void pumping(){
+        for(int i=0;i<waterLevel.Length;i++){
+            waterLevel[i]-=Time.deltaTime*2.5f;
+        }
     }
 }

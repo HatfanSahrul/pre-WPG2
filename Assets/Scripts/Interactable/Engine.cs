@@ -88,6 +88,7 @@ public class Engine : MonoBehaviour
     }
 
     void mainActivity(){
+        handler.GetComponent<handler>().fuel=fuel;
         if(isOn){
             fuel-=Time.deltaTime;
             if(fuel>0){
