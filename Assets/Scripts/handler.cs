@@ -100,7 +100,7 @@ public class handler : MonoBehaviour
     
     public float fuel;
     public float jarakTempuh;
-    void status(){
+ne    void status(){
         if(fuel<=0 || !isElecticOn1){
             submarineSpeed-=Time.deltaTime;
         }
